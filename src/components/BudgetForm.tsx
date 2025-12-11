@@ -33,15 +33,15 @@ const BudgetForm = () => {
     // Create WhatsApp message
     const message = encodeURIComponent(
       `*Novo Orçamento - Portfólio*\n\n` +
-        `*Nome:* ${formData.name}\n` +
-        `*Email:* ${formData.email}\n` +
-        `*Tipo de Projeto:* ${projectTypes.find((p) => p.value === formData.projectType)?.label}\n` +
-        `*Descrição:* ${formData.description}\n` +
-        `*Link de Referência:* ${formData.referenceLink || "Não informado"}`
+      `*Nome:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Tipo de Projeto:* ${projectTypes.find((p) => p.value === formData.projectType)?.label}\n` +
+      `*Descrição:* ${formData.description}\n` +
+      `*Link de Referência:* ${formData.referenceLink || "Não informado"}`
     );
 
     // Open WhatsApp (replace with your number)
-    window.open(`https://wa.me/5500000000000?text=${message}`, "_blank");
+    window.open(`https://wa.me/5582981313933?text=${message}`, "_blank");
 
     toast({
       title: "Mensagem preparada!",

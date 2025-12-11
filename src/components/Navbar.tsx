@@ -24,11 +24,10 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-4 shadow-sm"
           : "bg-transparent py-6"
-      }`}
+        }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -55,9 +54,7 @@ const Navbar = () => {
 
           {/* BOTÃO DE CTA PRINCIPAL (Vermelho) */}
           <a
-            href="https://wa.me/5582981313933" // Link direto para o WhatsApp
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#orcamento"
             className="relative inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 group"
           >
             <span className="relative z-10">Solicitar Orçamento</span>
@@ -98,12 +95,10 @@ const Navbar = () => {
                   </li>
                 ))}
               </ul>
-              
+
               {/* Mobile CTA */}
               <a
-                href="https://wa.me/5582981313933"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#orcamento"
                 className="w-full text-center px-6 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
