@@ -25,15 +25,14 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-4 shadow-sm"
-          : "bg-transparent py-6"
+        ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-4 shadow-sm"
+        : "bg-transparent py-6"
         }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="font-display text-2xl font-bold tracking-tight group">
-          <span className="text-foreground">Murilo</span>{" "}
-          <span className="gradient-text group-hover:opacity-80 transition-opacity">Celestino</span>
+        <a href="#" className="font-display text-2xl font-bold tracking-tight group flex items-center gap-2">
+          <img src="/faviconmc.png" alt="Logo" className="w-10 h-10 rounded-full hover:scale-110 transition-transform duration-300" />
         </a>
 
         {/* Desktop Navigation & CTA */}
