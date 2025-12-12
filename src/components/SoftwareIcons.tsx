@@ -46,7 +46,7 @@ const SoftwareIcons = () => {
       bgColor: "rgba(255, 255, 255, 0.1)",
     },
     {
-      name: "Seedream", 
+      name: "Seedream",
       imageSrc: "/seedream.png",
       bgColor: "rgba(255, 255, 255, 0.1)",
     },
@@ -63,7 +63,7 @@ const SoftwareIcons = () => {
           className="group relative"
         >
           <div
-            className="w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-300 border border-transparent hover:border-white/10 hover:scale-110 overflow-hidden"
+            className="w-12 h-12 flex items-center justify-center rounded-xl transition-all duration-300 border border-transparent hover:border-white/10 hover:scale-110 overflow-hidden shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]"
             style={{ backgroundColor: item.bgColor }}
           >
             {/* LÓGICA: Se tiver 'abbr' (Adobe), mostra texto. Se tiver 'imageSrc' (IA), mostra imagem. */}
@@ -75,14 +75,14 @@ const SoftwareIcons = () => {
                 {item.abbr}
               </span>
             ) : (
-              <img 
-                src={item.imageSrc} 
-                alt={item.name} 
+              <img
+                src={item.imageSrc}
+                alt={item.name}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
             )}
           </div>
-          
+
           {/* Tooltip */}
           <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-medium text-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none z-10">
             {item.name}

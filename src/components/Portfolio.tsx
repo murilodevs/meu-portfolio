@@ -103,13 +103,13 @@ const Portfolio = () => {
   // --- LOGOS DOS CLIENTES ---
   // Se quiser tornar clicável, adicione 'siteUrl' e mude a div para <a href={client.siteUrl}>
   const clients = [
-    { name: "Cliente 1", logo: "/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
-    { name: "Cliente 2", logo: "/logo2.png", siteUrl: "https://loud.gg/" },
-    { name: "Cliente 3", logo: "/logo3.png", siteUrl: "https://www.projetodraft.com/" },
-    { name: "Cliente 4", logo: "/logo4.png", siteUrl: "https://vera.bet.br/" },
-    { name: "Cliente 5", logo: "/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
-    { name: "Cliente 6", logo: "/logo6.png", siteUrl: "https://7k.bet.br/" },
-    { name: "Cliente 7", logo: "/logo7.png", siteUrl: "https://cassino.bet.br/" },
+    { name: "Ana Gaming", logo: "/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
+    { name: "LOUD", logo: "/logo2.png", siteUrl: "https://loud.gg/" },
+    { name: "Projeto Draft", logo: "/logo3.png", siteUrl: "https://www.projetodraft.com/" },
+    { name: "Vera.bet", logo: "/logo4.png", siteUrl: "https://vera.bet.br/" },
+    { name: "Group Phoenix", logo: "/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
+    { name: "7k.bet", logo: "/logo6.png", siteUrl: "https://7k.bet.br/" },
+    { name: "Cassino.bet", logo: "/logo7.png", siteUrl: "https://cassino.bet.br/" },
   ];
 
   const filteredVideos = videos.filter((v) => v.category === activeCategory);

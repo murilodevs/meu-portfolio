@@ -20,7 +20,7 @@ const BudgetForm = () => {
     { value: "vsl", label: "VSL (Video Sales Letter)" },
     { value: "short", label: "Vídeo Curto (Reels/TikTok)" },
     { value: "longform", label: "Vídeo Longo (YouTube)" },
-    { value: "ads", label: "Anúncio / Ad" },
+    { value: "ads", label: "Criativos para Anúncios (Ads)" },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -161,7 +161,7 @@ const BudgetForm = () => {
                 rows={5}
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Descreva seu projeto, objetivos, público-alvo e qualquer informação relevante..."
+                placeholder="Ex: Preciso de 5 vídeos estilo VSL cinematográfico para um lançamento na área de saúde..."
                 className={`${inputClasses} resize-none`}
               />
             </div>
