@@ -50,9 +50,18 @@ const Hero = () => {
     }
   ];
 
-  return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20 pb-24 lg:py-24">
+  const clients = [
+    { name: "Ana Gaming", logo: "/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
+    { name: "LOUD", logo: "/logo2.png", siteUrl: "https://loud.gg/" },
+    { name: "Projeto Draft", logo: "/logo3.png", siteUrl: "https://www.projetodraft.com/" },
+    { name: "Vera.bet", logo: "/logo4.png", siteUrl: "https://vera.bet.br/" },
+    { name: "Group Phoenix", logo: "/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
+    { name: "7k.bet", logo: "/logo6.png", siteUrl: "https://7k.bet.br/" },
+    { name: "Cassino.bet", logo: "/logo7.png", siteUrl: "https://cassino.bet.br/" },
+  ];
 
+  return (
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-12 pb-16 lg:py-24">
       {/* --- EFEITOS DE FUNDO --- */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-glow-pulse -translate-x-1/2 -translate-y-1/2" />
@@ -68,7 +77,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-16">
 
           {/* --- LADO ESQUERDO (TEXTO) --- */}
           <div className="flex-1 text-center lg:text-left max-w-2xl lg:max-w-none z-20 relative">
@@ -77,7 +86,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex justify-center lg:justify-start mb-6"
+              className="flex justify-center lg:justify-start mb-6 w-full"
             >
               <SoftwareIcons />
             </motion.div>
@@ -106,7 +115,7 @@ const Hero = () => {
             >
               <span className="text-foreground">Murilo</span>
               <br />
-              <span className="gradient-text">Celestino</span>
+              <span className="gradient-text font-bold">Celestino</span>
             </motion.h1>
 
             {/* Descrição - SEM TRAÇADO EM "ARMAS DE CONVERSÃO" */}
@@ -114,11 +123,11 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="text-base sm:text-lg text-muted-foreground/90 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed"
+              className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed"
             >
-              Eu não edito vídeos bonitos. Eu construo <strong className="text-foreground font-bold">armas de conversão</strong>.
+              Eu ajudo marcas a transformarem ideias em vídeos que engajam e convertem.
               <br className="hidden md:block" />
-              Se seu conteúdo não vende, não serve.
+              Com <strong className="text-foreground font-bold">estratégia, clareza e propósito</strong>.
             </motion.p>
 
             <motion.div
@@ -129,7 +138,7 @@ const Hero = () => {
             >
               <a
                 href="#portfolio"
-                className="group relative inline-flex items-center gap-3 px-10 py-5 rounded-full bg-primary text-primary-foreground font-semibold text-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 w-full sm:w-auto justify-center"
+                className="group relative inline-flex items-center gap-3 px-10 py-3.5 rounded-md bg-primary text-primary-foreground font-semibold text-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/30 w-full sm:w-auto justify-center"
               >
                 <span className="relative z-10 flex items-center gap-3">
                   <Play size={24} fill="currentColor" />
@@ -158,6 +167,42 @@ const Hero = () => {
                 ))}
               </div>
 
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                // Esconde em telas grandes (lg:hidden)
+                className="pt-8 w-full lg:hidden"
+              >
+                <div className="flex flex-wrap items-center justify-center gap-4">
+                  {clients.map((client, index) => (
+                    <motion.a
+                      key={client.name}
+                      href={client.siteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05 }}
+                      className="group relative w-[47%] h-24 rounded-xl bg-gradient-to-br from-black/80 to-primary/10 border border-primary/30 backdrop-blur-sm flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-500 hover:border-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:bg-primary/25"
+                      title={client.name}
+                    >
+                      {/* Brilho "passando" no hover (Dourado) */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+
+                      <img
+                        src={client.logo}
+                        alt={client.name}
+                        style={{ filter: "contrast(1.25)" }}
+                        className="max-w-[70%] max-h-[70%] object-contain opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300"
+                      />
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+
             </motion.div>
           </div>
 
@@ -166,20 +211,20 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.95, x: 50 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            // Adicionado scale-110 no desktop para aumentar visualmente e origin-bottom para crescer para cima
-            className="flex-1 w-full max-w-md lg:max-w-lg relative flex flex-col justify-end items-center lg:items-end mt-12 lg:mt-0 lg:-mt-24 z-10 lg:scale-110 lg:origin-bottom"
+            // Ajustado para mt-0 no mobile e lg:scale-110 no desktop
+            className="flex-1 w-full max-w-md lg:max-w-lg relative flex flex-col justify-end items-center lg:items-end mt-0 lg:-mt-24 z-10 lg:scale-110 lg:origin-bottom"
           >
             {/* Glow de Fundo - Refined Backlight */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/30 blur-[100px] rounded-full -z-10 mix-blend-screen pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/10 blur-[120px] rounded-full -z-20 pointer-events-none" />
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/20 blur-[120px] rounded-full -z-10 mix-blend-screen pointer-events-none" />
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 blur-[140px] rounded-full -z-20 pointer-events-none" />
 
             {/* Imagem (Normal/Estática com Reflexo + Noise) */}
             <div className="relative z-10 w-full flex justify-center lg:justify-end">
               <img
                 src="/sobre-mim.png"
                 alt="Murilo Celestino"
-                style={{ filter: "url(#grain)" }}
-                className="relative z-20 w-auto h-auto max-h-[800px] lg:max-h-[90vh] object-contain object-bottom drop-shadow-2xl mask-image-b-fade"
+                style={{ filter: "url(#grain) contrast(1.15) saturate(0.9) drop-shadow(0 0 8px hsl(var(--primary)/0.8))" }}
+                className="relative z-20 w-auto h-auto max-h-[350px] sm:max-h-[500px] lg:max-h-[90vh] object-contain object-bottom mask-image-b-fade"
               />
 
               {/* Reflexo no Chão */}
@@ -187,7 +232,7 @@ const Hero = () => {
                 <img
                   src="/sobre-mim.png"
                   alt=""
-                  className="w-auto h-auto max-h-[800px] lg:max-h-[90vh] object-contain object-bottom scale-y-[-1] origin-bottom mask-image-fade-reflection blur-[2px] translate-y-[20px]"
+                  className="w-auto h-auto max-h-[350px] sm:max-h-[500px] lg:max-h-[90vh] object-contain object-bottom scale-y-[-1] origin-bottom mask-image-fade-reflection blur-[2px] translate-y-[20px]"
                 />
               </div>
 
@@ -196,6 +241,42 @@ const Hero = () => {
             </div>
 
           </motion.div>
+
+          {/* --- COLUNA DIREITA: CLIENTES VERTICAIS (DESKTOP) --- */}
+          <div className="hidden lg:flex flex-col justify-center items-center gap-4 z-20 h-full ml-8">
+            <motion.p
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="text-xs font-bold text-primary uppercase tracking-[0.2em] mb-4 drop-shadow-[0_0_8px_hsl(var(--primary)/0.5)]"
+            >
+              Clientes
+            </motion.p>
+            {clients.map((client, index) => (
+              <motion.a
+                key={client.name}
+                href={client.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                whileHover={{ scale: 1.05, x: -5 }}
+                transition={{ duration: 0.5, delay: 1.2 + (index * 0.1) }}
+                className="group relative w-28 h-20 rounded-xl bg-gradient-to-br from-black/80 to-primary/10 border border-primary/30 backdrop-blur-sm flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-500 hover:border-primary hover:shadow-[0_0_20px_hsl(var(--primary)/0.5)] hover:bg-primary/25"
+                title={client.name}
+              >
+                {/* Brilho "passando" no hover (Dourado) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  style={{ filter: "contrast(1.25)" }}
+                  className="max-w-[70%] max-h-[70%] object-contain opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300"
+                />
+              </motion.a>
+            ))}
+          </div>
 
         </div>
       </div>

@@ -93,7 +93,7 @@ const BudgetForm = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             onSubmit={handleSubmit}
-            className="glass-card rounded-2xl p-8 space-y-6"
+            className="glass-card rounded-2xl p-5 sm:p-8 space-y-6"
           >
             {/* Name */}
             <div>

@@ -100,17 +100,7 @@ const Portfolio = () => {
     { id: "41", title: "A beleza das espécies dos rios amazônicos retratada em serigrafia", thumbnail: "/thumb-cop30-9.jpg", videoUrl: "https://drive.google.com/file/d/1Lcm3ViOtqirmBidi4EbgLOm0cThwxhGr/view?usp=drive_link", category: "vsl", duration: "Video" },
   ];
 
-  // --- LOGOS DOS CLIENTES ---
-  // Se quiser tornar clicável, adicione 'siteUrl' e mude a div para <a href={client.siteUrl}>
-  const clients = [
-    { name: "Ana Gaming", logo: "/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
-    { name: "LOUD", logo: "/logo2.png", siteUrl: "https://loud.gg/" },
-    { name: "Projeto Draft", logo: "/logo3.png", siteUrl: "https://www.projetodraft.com/" },
-    { name: "Vera.bet", logo: "/logo4.png", siteUrl: "https://vera.bet.br/" },
-    { name: "Group Phoenix", logo: "/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
-    { name: "7k.bet", logo: "/logo6.png", siteUrl: "https://7k.bet.br/" },
-    { name: "Cassino.bet", logo: "/logo7.png", siteUrl: "https://cassino.bet.br/" },
-  ];
+
 
   const filteredVideos = videos.filter((v) => v.category === activeCategory);
 
@@ -176,7 +166,7 @@ const Portfolio = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="video-card group relative rounded-xl overflow-hidden border border-border/50 bg-card/50 shadow-sm hover:shadow-md transition-all cursor-pointer w-[calc((100%-1rem)/2)] sm:w-[calc((100%-2rem)/3)] md:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-5rem)/6)]"
+                className="video-card group relative rounded-xl overflow-hidden border border-border/50 bg-card/50 shadow-sm hover:shadow-md transition-all cursor-pointer w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-5rem)/6)]"
                 onMouseEnter={() => setHoveredVideo(video.id)}
                 onMouseLeave={() => setHoveredVideo(null)}
                 onClick={() => setSelectedVideo(video)}
@@ -213,53 +203,7 @@ const Portfolio = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* --- ÁREA DOS LOGOS DAS EMPRESAS --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative pt-10 border-t border-border/30 text-center"
-        >
-          <h3 className="text-lg font-display font-semibold text-muted-foreground mb-8">
-            Empresas que confiam no meu trabalho
-          </h3>
 
-          <div className="relative">
-            {/* Brilho de fundo */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-3xl -z-10" />
-
-            {/* Grid de Logos */}
-            <div className="relative flex flex-wrap items-center justify-center gap-6 md:gap-8">
-              {clients.map((client, index) => (
-                <motion.a
-                  key={client.name}
-                  href={client.siteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="group relative w-32 h-20 md:w-36 md:h-24 rounded-xl bg-gradient-to-br from-card/80 to-card/30 border border-border/50 backdrop-blur-sm flex items-center justify-center overflow-hidden cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20"
-                  title={client.name}
-                >
-                  {/* Brilho "passando" no hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
-                  {/* A IMAGEM DO LOGO */}
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="max-w-[70%] max-h-[70%] object-contain opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300"
-                  />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-        </motion.div>
 
 
       </div>

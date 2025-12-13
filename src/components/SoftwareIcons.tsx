@@ -53,7 +53,7 @@ const SoftwareIcons = () => {
   ];
 
   return (
-    <div className="flex items-center gap-4 flex-wrap">
+    <div className="flex items-center justify-center lg:justify-start gap-4 flex-wrap">
       {software.map((item, index) => (
         <motion.div
           key={item.name}

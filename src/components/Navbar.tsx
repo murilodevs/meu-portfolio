@@ -86,7 +86,7 @@ const Navbar = () => {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="block py-2 text-muted-foreground hover:text-foreground transition-colors"
+                      className="w-full block text-center px-6 py-4 rounded-full bg-secondary text-white font-semibold text-lg hover:bg-secondary/80 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.label}

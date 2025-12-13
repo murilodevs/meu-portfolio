@@ -21,9 +21,10 @@
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 95%;
 
-    /* --- MUDANÇA AQUI (Vermelho Vivo) --- */
-    --primary: 348 93% 58%;
-    --primary-foreground: 0 0% 100%;
+    /* --- GOLD THEME (Estilo Ouro) --- */
+    /* Primary: Premium Dark Gold (#C9A227) */
+    --primary: 45 68% 47%;
+    --primary-foreground: 0 0% 7%;
 
     --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 95%;
@@ -31,8 +32,8 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 55%;
 
-    /* --- MUDANÇA AQUI (Laranja) --- */
-    --accent: 16 95% 60%;
+    /* Accent: Warm Bronze/Amber */
+    --accent: 32 80% 58%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -40,17 +41,17 @@
 
     --border: 0 0% 15%;
     --input: 0 0% 12%;
-    /* Atualizado para combinar com o Primary */
-    --ring: 348 93% 58%;
+    /* Combine with Primary */
+    --ring: 45 68% 47%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens - ATUALIZADOS */
-    --glow-primary: 348 93% 58%;
-    --glow-accent: 16 95% 60%;
+    /* Custom tokens - GOLD UPDATES */
+    --glow-primary: 45 68% 47%;
+    --glow-accent: 32 80% 58%;
 
-    /* Gradiente Vermelho -> Laranja */
-    --gradient-primary: linear-gradient(135deg, hsl(348 93% 58%) 0%, hsl(16 95% 60%) 100%);
+    /* Gradient Gold -> Neutral (Shine) -> Bronze */
+    --gradient-primary: linear-gradient(135deg, hsl(46 80% 58%) 0%, hsl(40 30% 90%) 50%, hsl(32 80% 58%) 100%);
 
     --gradient-surface: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
     --glass-background: rgba(255, 255, 255, 0.03);
@@ -60,8 +61,8 @@
     --font-display: 'Syne', sans-serif;
     --font-body: 'Inter', sans-serif;
 
-    /* Shadows - Atualizado para brilho vermelho */
-    --shadow-glow: 0 0 60px hsl(348 93% 58% / 0.15);
+    /* Shadows - Gold Glow */
+    --shadow-glow: 0 0 60px hsl(48 96% 53% / 0.15);
     --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.4);
     --shadow-elevated: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
   }
@@ -110,12 +111,9 @@
     /* Luz de borda superior sutil */
   }
 
-  /* Gradient text */
+  /* Solid Gold Text (Previously Gradient) */
   .gradient-text {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #D4AF37;
   }
 
   /* Video thumbnail card - Refined Interaction */
@@ -169,6 +167,12 @@
   /* Text balance */
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Main Image Mask - Fades bottom to avoid hard edge with drop-shadow */
+  .mask-image-b-fade {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
 
   /* Reflection Mask */
