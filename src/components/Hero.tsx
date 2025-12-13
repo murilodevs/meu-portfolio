@@ -63,9 +63,9 @@ const Hero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-12 pb-16 lg:py-24">
       {/* --- EFEITOS DE FUNDO --- */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-glow-pulse -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[150px] animate-glow-pulse translate-x-1/2 translate-y-1/2" style={{ animationDelay: "1.5s" }} />
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[10%] left-[10%] w-[400px] h-[400px] bg-primary/8 rounded-full blur-[120px] animate-glow-pulse" />
+        <div className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-accent/8 rounded-full blur-[120px] animate-glow-pulse" style={{ animationDelay: "1.5s" }} />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -194,7 +194,11 @@ const Hero = () => {
 
                       <img
                         src={client.logo}
-                        alt={client.name}
+                        alt={`Logo ${client.name}`}
+                        loading="lazy"
+                        decoding="async"
+                        width={112}
+                        height={80}
                         style={{ filter: "contrast(1.25)" }}
                         className="max-w-[70%] max-h-[70%] object-contain opacity-70 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300"
                       />
@@ -214,9 +218,9 @@ const Hero = () => {
             // Ajustado para mt-0 no mobile e lg:scale-110 no desktop
             className="flex-1 w-full max-w-md lg:max-w-lg relative flex flex-col justify-end items-center lg:items-end mt-0 lg:-mt-24 z-10 lg:scale-110 lg:origin-bottom"
           >
-            {/* Glow de Fundo - Refined Backlight */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-primary/20 blur-[120px] rounded-full -z-10 mix-blend-screen pointer-events-none" />
-            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 blur-[140px] rounded-full -z-20 pointer-events-none" />
+            {/* Glow de Fundo - Soft Cinematic Backlight */}
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-primary/15 blur-[150px] rounded-full -z-10 mix-blend-screen pointer-events-none" />
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-accent/8 blur-[180px] rounded-full -z-20 pointer-events-none" />
 
             {/* Imagem (Normal/Estática com Reflexo + Noise) */}
             <div className="relative z-10 w-full flex justify-center lg:justify-end">
@@ -270,7 +274,11 @@ const Hero = () => {
 
                 <img
                   src={client.logo}
-                  alt={client.name}
+                  alt={`Logo ${client.name}`}
+                  loading="lazy"
+                  decoding="async"
+                  width={112}
+                  height={80}
                   style={{ filter: "contrast(1.25)" }}
                   className="max-w-[70%] max-h-[70%] object-contain opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300"
                 />

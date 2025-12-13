@@ -24,12 +24,13 @@ const Index = () => {
           content="Editor de vídeo profissional especializado em VSLs, Ads, vídeos curtos e conteúdo para redes sociais."
         />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://murilocelestino.com" />
+        <meta property="og:image" content="https://murilocelestino.com.br/sobre-mim.png" />
+        <link rel="canonical" href="https://murilocelestino.com.br" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Navbar />
-        <main>
+        <main id="main-content" role="main">
           <Hero />
           <Portfolio />
           <BudgetForm />

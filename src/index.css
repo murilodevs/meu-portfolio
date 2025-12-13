@@ -12,7 +12,7 @@
 /* Cinematic Video Editor Portfolio Design System */
 @layer base {
   :root {
-    --background: 0 0% 4%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 95%;
 
     --card: 0 0% 7%;
@@ -30,7 +30,7 @@
     --secondary-foreground: 0 0% 95%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --muted-foreground: 0 0% 65%;
 
     /* Accent: Warm Bronze/Amber */
     --accent: 32 80% 58%;
@@ -53,7 +53,7 @@
     /* Gradient Gold -> Neutral (Shine) -> Bronze */
     --gradient-primary: linear-gradient(135deg, hsl(46 80% 58%) 0%, hsl(40 30% 90%) 50%, hsl(32 80% 58%) 100%);
 
-    --gradient-surface: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 0%) 100%);
     --glass-background: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
 
@@ -68,7 +68,7 @@
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 95%;
   }
 }

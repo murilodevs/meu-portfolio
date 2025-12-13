@@ -57,7 +57,7 @@ const Portfolio = () => {
     {
       id: "5",
       title: "DB",
-      thumbnail: "thumbdb.png",
+      thumbnail: "/thumbdb.png",
       videoUrl: "https://drive.google.com/file/d/1xwcUdfZaEne1kcVm26NFclxoij7aERsC/view?usp=drive_link",
       category: "ads",
       duration: "3:41"
@@ -65,7 +65,7 @@ const Portfolio = () => {
     {
       id: "6",
       title: "PT",
-      thumbnail: "thumbpt.png",
+      thumbnail: "/thumbpt.png",
       videoUrl: "https://drive.google.com/file/d/182QVzMMwd4uYZkJSDoeR02c_1M-4Sy1w/view?usp=drive_link",
       category: "ads",
       duration: "1:58"
@@ -139,6 +139,8 @@ const Portfolio = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
+              aria-label={`Filtrar por ${cat.label}`}
+              aria-pressed={activeCategory === cat.id}
               className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === cat.id
                 ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                 : "bg-secondary/50 text-secondary-foreground hover:bg-secondary border border-transparent hover:border-border"
@@ -166,7 +168,16 @@ const Portfolio = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="video-card group relative rounded-xl overflow-hidden border border-border/50 bg-card/50 shadow-sm hover:shadow-md transition-all cursor-pointer w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-5rem)/6)]"
+                role="button"
+                tabIndex={0}
+                aria-label={`Assistir vídeo: ${video.title}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedVideo(video);
+                  }
+                }}
+                className="video-card group relative rounded-xl overflow-hidden border border-border/50 bg-card/50 shadow-sm hover:shadow-md transition-all cursor-pointer w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-5rem)/6)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                 onMouseEnter={() => setHoveredVideo(video.id)}
                 onMouseLeave={() => setHoveredVideo(null)}
                 onClick={() => setSelectedVideo(video)}
@@ -175,9 +186,10 @@ const Portfolio = () => {
                 <div className={`relative overflow-hidden ${(video.category === 'shorts' || video.category === 'vsl' || video.category === 'longform') ? 'aspect-[9/16]' : 'aspect-video'}`}>
                   <img
                     src={video.thumbnail}
-                    alt={video.title}
+                    alt={`Thumbnail do vídeo: ${video.title}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    // Fallback para caso a imagem do Drive falhe
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop";
                     }}
