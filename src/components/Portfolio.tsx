@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, ExternalLink } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight } from "lucide-react";
 import VideoModal from "./VideoModal";
 
 // Tipos das categorias (IDs internos)
@@ -19,18 +19,23 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState<VideoCategory>("shorts");
   const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   // Mapeamento: ID do Sistema -> Nome que aparece no Botão
   const categories: { id: VideoCategory; label: string }[] = [
     { id: "shorts", label: "iGaming" },
     { id: "ads", label: "VSLs" },
-    { id: "longform", label: "Motions" },
+    { id: "longform", label: "Motion & IA" },
     { id: "vsl", label: "Redes Sociais" },
   ];
 
+  // Categorias que usam formato vertical
+  const verticalCategories: VideoCategory[] = ["shorts", "vsl", "longform"];
+
   // --- SEUS VÍDEOS ---
+  // IMPORTANTE: Adicione novos vídeos NO INÍCIO de cada categoria para aparecerem primeiro!
   const videos: Video[] = [
-    // Categoria: iGaming (shorts)
+    // Categoria: iGaming (shorts) - Adicione novos aqui no início ↓
     { id: "1", title: "Ana Partners", thumbnail: "/thumb-ana.png", videoUrl: "https://drive.google.com/file/d/1MPx78vcbu_BSKR74I1ffNxY4mF0nB5HD/view?usp=drive_link", category: "shorts", duration: "0:45" },
     { id: "2", title: "Natal Vera.bet", thumbnail: "/thumb-natal.png", videoUrl: "https://drive.google.com/file/d/1vezppiIYzo30H0EZsJFZIQ6-oQgUcm0U/view?usp=drive_link", category: "shorts", duration: "0:30" },
     { id: "3", title: "Corridas dos Fortunes", thumbnail: "/thumb-corridaf.png", videoUrl: "https://drive.google.com/file/d/1VveGF8jIEl5t1rDG8jlYOIUBrleOURX1/view?usp=drive_link", category: "shorts", duration: "0:58" },
@@ -44,12 +49,27 @@ const Portfolio = () => {
     { id: "33", title: "100% Autorizada Vera.bet", thumbnail: "/igaming11.png", videoUrl: "https://drive.google.com/file/d/197patMiLDjQXriOWZLKVKhtI3q5lV6kN/view?usp=drive_link", category: "shorts", duration: "0:30" },
     { id: "34", title: "Black Vera.bet", thumbnail: "/igaming12.png", videoUrl: "https://drive.google.com/file/d/1MkdkBIlFFLtAdIntMHsjoc4wBf3hWmKy/view?usp=drive_link", category: "shorts", duration: "0:30" },
 
-    // Categoria: VSLs (ads)
+    // Categoria: VSLs (ads) - Adicione novos aqui no início ↓
+    {
+      id: "42",
+      title: "WL 2",
+      thumbnail: "/thumbwl2.png",
+      videoUrl: "https://drive.google.com/file/d/1jgUESdO0Wl7afzY2neEFFvgHwGxm3zHA/view?usp=drive_link",
+      category: "ads",
+      duration: "5:00"
+    },
+    {
+      id: "43",
+      title: "WL 3",
+      thumbnail: "/thumbwl3.png",
+      videoUrl: "https://drive.google.com/file/d/1-tOcsNjBb-lLGdbp9H2qRJS8SKps2HCt/view?usp=drive_link",
+      category: "ads",
+      duration: "5:00"
+    },
     {
       id: "4",
       title: "WL",
-      // OBS: Links do Drive 'view' não carregam como imagem. O ideal é usar arquivo local na pasta public (ex: "/thumb-wl.jpg")
-      thumbnail: "/thumbwl.png", // Coloquei uma img temporária para não quebrar
+      thumbnail: "/thumbwl.png",
       videoUrl: "https://drive.google.com/file/d/1posMXt_Zwrvg43SlefVxNo49TQpTkAIo/view?usp=drive_link",
       category: "ads",
       duration: "5:52"
@@ -71,7 +91,9 @@ const Portfolio = () => {
       duration: "1:58"
     },
 
-    // Categoria: Motions (longform)
+    // Categoria: Motion & IA (longform) - Adicione novos aqui no início ↓
+    { id: "44", title: "Motion IA 1", thumbnail: "/motion13.png", videoUrl: "https://drive.google.com/file/d/1LR6RgBTgVhZojQHebIgO-EwxklTYpLBz/view?usp=drive_link", category: "longform", duration: "1:00" },
+    { id: "45", title: "Motion IA 2", thumbnail: "/motion14.png", videoUrl: "https://drive.google.com/file/d/1PRNenzKJwK-Y0DjfpXbPrYx3YCwpPmCA/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "7", title: "Saque Rápido Vera.bet", thumbnail: "/motion1.png", videoUrl: "https://drive.google.com/file/d/1-rZOLFESwDpQjnbWxk2qf-24k9gxGzrY/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "8", title: "Saque Rápido Vera.bet", thumbnail: "/motion2.png", videoUrl: "https://drive.google.com/file/d/1HTLl-WI_PxKJA4FbVBV_w6-dX7PLN6Qi/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "11", title: "Mines Vera.bet", thumbnail: "/motion3.png", videoUrl: "https://drive.google.com/file/d/179OZh6sc24vEkS2WkFcjZHyaR6fMOmhZ/view?usp=drive_link", category: "longform", duration: "1:00" },
@@ -85,7 +107,7 @@ const Portfolio = () => {
     { id: "30", title: "Estratégia Aviator Vera.bet", thumbnail: "/motion11.png", videoUrl: "https://drive.google.com/file/d/1VEy7DkmBoCAMDsSbFI32SZO3mZ0rbo9n/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "31", title: "Fortune Mouse Vera.bet", thumbnail: "/motion12.png", videoUrl: "https://drive.google.com/file/d/1y3AzdSPLLMoMWUm_U9RTtkuprUttUU5z/view?usp=drive_link", category: "longform", duration: "1:00" },
 
-    // Categoria: Redes Sociais (vsl)
+    // Categoria: Redes Sociais (vsl) - Adicione novos aqui no início ↓
     { id: "13", title: "Arte e Cultura na Pauta Climática", thumbnail: "/thumb-cop30-1.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397677580281253888?compact=1", category: "vsl", duration: "Video" },
     { id: "14", title: "Empreendedorismo na Amazônia", thumbnail: "/thumb-cop30-2.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397641693749030912?compact=1", category: "vsl", duration: "Video" },
     { id: "15", title: "Festival de Investimentos de Impacto", thumbnail: "/thumb-cop30-3.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7394507742683668481?compact=1", category: "vsl", duration: "Video" },
@@ -100,9 +122,18 @@ const Portfolio = () => {
     { id: "41", title: "A beleza das espécies dos rios amazônicos retratada em serigrafia", thumbnail: "/thumb-cop30-9.jpg", videoUrl: "https://drive.google.com/file/d/1Lcm3ViOtqirmBidi4EbgLOm0cThwxhGr/view?usp=drive_link", category: "vsl", duration: "Video" },
   ];
 
-
-
   const filteredVideos = videos.filter((v) => v.category === activeCategory);
+
+  // Funções de navegação do carrossel
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.clientWidth * 0.8;
+      carouselRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section id="portfolio" className="py-20 relative bg-background/50">
@@ -126,14 +157,12 @@ const Portfolio = () => {
         </motion.div>
 
         {/* Botões de Categoria */}
-
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-10"
+          className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {categories.map((cat) => (
             <button
@@ -141,82 +170,140 @@ const Portfolio = () => {
               onClick={() => setActiveCategory(cat.id)}
               aria-label={`Filtrar por ${cat.label}`}
               aria-pressed={activeCategory === cat.id}
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === cat.id
-                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                : "bg-secondary/50 text-secondary-foreground hover:bg-secondary border border-transparent hover:border-border"
+              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 overflow-hidden ${activeCategory === cat.id
+                ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                : "bg-secondary/50 text-secondary-foreground hover:bg-secondary border border-border/50 hover:border-primary/30"
                 }`}
             >
+              {activeCategory === cat.id && (
+                <motion.div
+                  layoutId="activeCategory"
+                  className="absolute inset-0 bg-primary rounded-full -z-10"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
               {cat.label}
             </button>
           ))}
         </motion.div>
 
-
-        {/* Grade de Vídeos */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="flex flex-wrap justify-center gap-4 mb-16"
+        {/* Carrossel Estilo Netflix */}
+        <div className="relative group/carousel mb-16">
+          {/* Botão Esquerda */}
+          <button
+            onClick={() => scrollCarousel('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-black/70 hover:bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 -translate-x-1/2 hover:scale-110 shadow-lg border border-white/10"
+            aria-label="Anterior"
           >
-            {filteredVideos.map((video, index) => (
-              <motion.div
-                key={video.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Assistir vídeo: ${video.title}`}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    setSelectedVideo(video);
-                  }
-                }}
-                className="video-card group relative rounded-xl overflow-hidden border border-border/50 bg-card/50 shadow-sm hover:shadow-md transition-all cursor-pointer w-full sm:w-[calc((100%-1rem)/2)] md:w-[calc((100%-2rem)/3)] lg:w-[calc((100%-3rem)/4)] xl:w-[calc((100%-5rem)/6)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-                onMouseEnter={() => setHoveredVideo(video.id)}
-                onMouseLeave={() => setHoveredVideo(null)}
-                onClick={() => setSelectedVideo(video)}
-              >
-                {/* Thumbnail */}
-                <div className={`relative overflow-hidden ${(video.category === 'shorts' || video.category === 'vsl' || video.category === 'longform') ? 'aspect-[9/16]' : 'aspect-video'}`}>
-                  <img
-                    src={video.thumbnail}
-                    alt={`Thumbnail do vídeo: ${video.title}`}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
+            <ChevronLeft className="w-6 h-6 md:w-7 md:h-7 text-white" />
+          </button>
 
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
-                      <Play size={24} fill="white" className="text-white ml-1" />
+          {/* Botão Direita */}
+          <button
+            onClick={() => scrollCarousel('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 md:w-14 md:h-14 bg-black/70 hover:bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 translate-x-1/2 hover:scale-110 shadow-lg border border-white/10"
+            aria-label="Próximo"
+          >
+            <ChevronRight className="w-6 h-6 md:w-7 md:h-7 text-white" />
+          </button>
+
+          {/* Gradiente de fade nas bordas */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+          {/* Container do Carrossel */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4 }}
+              ref={carouselRef}
+              className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth px-4 py-4"
+              style={{ scrollSnapType: 'x mandatory' }}
+            >
+              {filteredVideos.map((video, index) => (
+                <motion.div
+                  key={video.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: index * 0.03 }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Assistir vídeo: ${video.title}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedVideo(video);
+                    }
+                  }}
+                  className="video-card-premium group relative rounded-2xl overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background flex-shrink-0"
+                  style={{
+                    scrollSnapAlign: 'start',
+                    width: (video.category === 'shorts' || video.category === 'vsl' || video.category === 'longform') ? '220px' : '340px'
+                  }}
+                  onMouseEnter={() => setHoveredVideo(video.id)}
+                  onMouseLeave={() => setHoveredVideo(null)}
+                  onClick={() => setSelectedVideo(video)}
+                >
+                  {/* Gradient Border Effect */}
+                  <div className="absolute -inset-[1px] bg-gradient-to-r from-primary/0 via-primary/0 to-primary/0 rounded-2xl transition-all duration-500 group-hover:from-primary/60 group-hover:via-accent/60 group-hover:to-primary/60 opacity-0 group-hover:opacity-100" />
+
+                  {/* Card Inner */}
+                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl overflow-hidden border border-border/30 group-hover:border-transparent transition-all duration-500">
+                    {/* Thumbnail */}
+                    <div className={`relative overflow-hidden ${(video.category === 'shorts' || video.category === 'vsl' || video.category === 'longform') ? 'aspect-[9/16]' : 'aspect-video'}`}>
+                      <img
+                        src={video.thumbnail}
+                        alt={`Thumbnail do vídeo: ${video.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop";
+                        }}
+                      />
+
+                      {/* Overlay Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+
+                      {/* Play Button - Centered */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0.8, opacity: 0 }}
+                          animate={{
+                            scale: hoveredVideo === video.id ? 1 : 0.8,
+                            opacity: hoveredVideo === video.id ? 1 : 0
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="relative"
+                        >
+                          {/* Glow Ring */}
+                          <div className="absolute inset-0 w-14 h-14 rounded-full bg-primary/30 blur-xl animate-pulse" />
+                          {/* Button */}
+                          <div className="relative w-14 h-14 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-xl shadow-primary/30 border border-primary-foreground/20">
+                            <Play size={24} fill="currentColor" className="text-primary-foreground ml-1" />
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Bottom Gradient for Title */}
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/90 to-transparent" />
+                    </div>
+
+                    {/* Title */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <h3 className="font-display text-xs font-semibold text-white group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                        {video.title}
+                      </h3>
                     </div>
                   </div>
-
-
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-display text-base font-semibold text-foreground group-hover:text-primary transition-colors flex items-center justify-between">
-                    {video.title}
-                  </h3>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-
-
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
       </div>
 
@@ -224,8 +311,9 @@ const Portfolio = () => {
         isOpen={!!selectedVideo}
         onClose={() => setSelectedVideo(null)}
         videoUrl={selectedVideo?.videoUrl || ""}
+        isVertical={selectedVideo ? verticalCategories.includes(selectedVideo.category) : false}
       />
-    </section >
+    </section>
   );
 };
 
