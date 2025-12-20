@@ -94,6 +94,9 @@ const Portfolio = () => {
     // Categoria: Motion & IA (longform) - Adicione novos aqui no início ↓
     { id: "44", title: "Motion IA 1", thumbnail: "/motion13.png", videoUrl: "https://drive.google.com/file/d/1LR6RgBTgVhZojQHebIgO-EwxklTYpLBz/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "45", title: "Motion IA 2", thumbnail: "/motion14.png", videoUrl: "https://drive.google.com/file/d/1PRNenzKJwK-Y0DjfpXbPrYx3YCwpPmCA/view?usp=drive_link", category: "longform", duration: "1:00" },
+    { id: "46", title: "Motion IA 3", thumbnail: "/motion15.png", videoUrl: "https://drive.google.com/file/d/1_1N3ZJG5NapifraLTpCtBjMRl2FGp0gl/view?usp=drive_link", category: "longform", duration: "1:00" },
+    { id: "47", title: "Motion IA 4", thumbnail: "/motion16.png", videoUrl: "https://drive.google.com/file/d/14tn5LU6usQbTydr3CnsrIolXKZMPtvPa/view?usp=drive_link", category: "longform", duration: "1:00" },
+    { id: "48", title: "Motion IA 5", thumbnail: "/motion17.png", videoUrl: "https://drive.google.com/file/d/1bhnXkX9LP0ujz1HXabclP91UqKI_jdR4/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "7", title: "Saque Rápido Vera.bet", thumbnail: "/motion1.png", videoUrl: "https://drive.google.com/file/d/1-rZOLFESwDpQjnbWxk2qf-24k9gxGzrY/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "8", title: "Saque Rápido Vera.bet", thumbnail: "/motion2.png", videoUrl: "https://drive.google.com/file/d/1HTLl-WI_PxKJA4FbVBV_w6-dX7PLN6Qi/view?usp=drive_link", category: "longform", duration: "1:00" },
     { id: "11", title: "Mines Vera.bet", thumbnail: "/motion3.png", videoUrl: "https://drive.google.com/file/d/179OZh6sc24vEkS2WkFcjZHyaR6fMOmhZ/view?usp=drive_link", category: "longform", duration: "1:00" },
