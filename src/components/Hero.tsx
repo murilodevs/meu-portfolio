@@ -51,13 +51,13 @@ const Hero = () => {
   ];
 
   const clients = [
-    { name: "Ana Gaming", logo: "/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
-    { name: "LOUD", logo: "/logo2.png", siteUrl: "https://loud.gg/" },
-    { name: "Projeto Draft", logo: "/logo3.png", siteUrl: "https://www.projetodraft.com/" },
-    { name: "Vera.bet", logo: "/logo4.png", siteUrl: "https://vera.bet.br/" },
-    { name: "Group Phoenix", logo: "/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
-    { name: "7k.bet", logo: "/logo6.png", siteUrl: "https://7k.bet.br/" },
-    { name: "Cassino.bet", logo: "/logo7.png", siteUrl: "https://cassino.bet.br/" },
+    { name: "Ana Gaming", logo: "/logos/logo1.png", siteUrl: "https://www.anagaming.com.br/" },
+    { name: "LOUD", logo: "/logos/logo2.png", siteUrl: "https://loud.gg/" },
+    { name: "Projeto Draft", logo: "/logos/logo3.png", siteUrl: "https://www.projetodraft.com/" },
+    { name: "Vera.bet", logo: "/logos/logo4.png", siteUrl: "https://vera.bet.br/" },
+    { name: "Group Phoenix", logo: "/logos/logo5.png", siteUrl: "https://groupphoenixmediabuyer.com/" },
+    { name: "7k.bet", logo: "/logos/logo6.png", siteUrl: "https://7k.bet.br/" },
+    { name: "Cassino.bet", logo: "/logos/logo7.png", siteUrl: "https://cassino.bet.br/" },
   ];
 
   return (

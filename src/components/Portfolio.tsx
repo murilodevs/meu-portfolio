@@ -6,6 +6,9 @@ import VideoModal from "./VideoModal";
 // Tipos das categorias (IDs internos)
 type VideoCategory = "shorts" | "ads" | "longform" | "vsl";
 
+// Tipos das empresas
+type Company = "all" | "vera.bet" | "bet7k" | "ana-partners" | "draft" | "loud" | "grupo-fenix" | "cassino" | "outros";
+
 interface Video {
   id: string;
   title: string;
@@ -13,10 +16,12 @@ interface Video {
   videoUrl: string;
   category: VideoCategory;
   duration: string;
+  company: Company;
 }
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState<VideoCategory>("shorts");
+  const [activeCompany, setActiveCompany] = useState<Company>("all");
   const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -29,6 +34,19 @@ const Portfolio = () => {
     { id: "vsl", label: "Redes Sociais" },
   ];
 
+  // Lista de empresas com logos
+  const companies: { id: Company; label: string; logo?: string }[] = [
+    { id: "all", label: "Todos" },
+    { id: "vera.bet", label: "Vera.bet", logo: "/logos/logo4.png" },
+    { id: "bet7k", label: "Bet7k", logo: "/logos/logo6.png" },
+    { id: "ana-partners", label: "Ana Partners", logo: "/logos/logo1.png" },
+    { id: "draft", label: "Draft", logo: "/logos/logo3.png" },
+    { id: "loud", label: "LOUD", logo: "/logos/logo2.png" },
+    { id: "grupo-fenix", label: "Grupo Fenix", logo: "/logos/logo5.png" },
+    { id: "cassino", label: "Cassino", logo: "/logos/logo7.png" },
+    { id: "outros", label: "Outros" },
+  ];
+
   // Categorias que usam formato vertical
   const verticalCategories: VideoCategory[] = ["shorts", "vsl", "longform"];
 
@@ -36,96 +54,97 @@ const Portfolio = () => {
   // IMPORTANTE: Adicione novos vídeos NO INÍCIO de cada categoria para aparecerem primeiro!
   const videos: Video[] = [
     // Categoria: iGaming (shorts) - Adicione novos aqui no início ↓
-    { id: "1", title: "Ana Partners", thumbnail: "/thumb-ana.png", videoUrl: "https://drive.google.com/file/d/1MPx78vcbu_BSKR74I1ffNxY4mF0nB5HD/view?usp=drive_link", category: "shorts", duration: "0:45" },
-    { id: "2", title: "Natal Vera.bet", thumbnail: "/thumb-natal.png", videoUrl: "https://drive.google.com/file/d/1vezppiIYzo30H0EZsJFZIQ6-oQgUcm0U/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "3", title: "Corridas dos Fortunes", thumbnail: "/thumb-corridaf.png", videoUrl: "https://drive.google.com/file/d/1VveGF8jIEl5t1rDG8jlYOIUBrleOURX1/view?usp=drive_link", category: "shorts", duration: "0:58" },
-    { id: "23", title: "Média de Escanteios", thumbnail: "/igaming4.png", videoUrl: "https://drive.google.com/file/d/19t4-4cPfwGp70V-buOVzlRx5ZS3OSM7E/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "24", title: "Experiência Bet7k", thumbnail: "/igaming5.png", videoUrl: "https://drive.google.com/file/d/16CHcpOanA6H7jfQWqmzb4RtZZJ2-Z0hE/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "25", title: "Cashback Superodds", thumbnail: "/igaming6.png", videoUrl: "https://drive.google.com/file/d/1U6DNodsYvpntQoB7xI8Kbu1GAHHjC7Cc/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "26", title: "Bônus Surpresa", thumbnail: "/igaming7.png", videoUrl: "https://drive.google.com/file/d/1SVjqtcfAekWvV3atQlwoP4kQeJxpULMj/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "27", title: "Diversão Responsável", thumbnail: "/igaming8.png", videoUrl: "https://drive.google.com/file/d/1aQhZmkwQt6KiDJ-iF_Ib5TP7_thqzy6C/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "28", title: "Vera.bet Radical", thumbnail: "/igaming9.png", videoUrl: "https://drive.google.com/file/d/1i_vg4BOZ2-ZGJixBrxGqii3ML3OTID_3/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "32", title: "Jogo de Verdade Vera.bet", thumbnail: "/igaming10.png", videoUrl: "https://drive.google.com/file/d/1L76nVpYhK2mqaNxnavje0Bs-hrSJBbjW/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "33", title: "100% Autorizada Vera.bet", thumbnail: "/igaming11.png", videoUrl: "https://drive.google.com/file/d/197patMiLDjQXriOWZLKVKhtI3q5lV6kN/view?usp=drive_link", category: "shorts", duration: "0:30" },
-    { id: "34", title: "Black Vera.bet", thumbnail: "/igaming12.png", videoUrl: "https://drive.google.com/file/d/1MkdkBIlFFLtAdIntMHsjoc4wBf3hWmKy/view?usp=drive_link", category: "shorts", duration: "0:30" },
+    { id: "49", title: "Aposta Milionária", thumbnail: "/igaming/igaming13.png", videoUrl: "https://drive.google.com/file/d/10-TUAuvAeiV3KooefbcU5hq8A7ZhLVgB/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "50", title: "Cassino VIP", thumbnail: "/igaming/igaming14.png", videoUrl: "https://drive.google.com/file/d/1QIB1rnpxm45P5VEI_fUYXsG4ouwbUhGv/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "51", title: "Super Jackpot", thumbnail: "/igaming/igaming15.png", videoUrl: "https://drive.google.com/file/d/16SRTZobLXdWDZwtoO4d-Kq4baIj3tJg5/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "52", title: "Rodada da Sorte", thumbnail: "/igaming/igaming16.png", videoUrl: "https://drive.google.com/file/d/1WeqihukHh-Q7WqBzoondLZ8oYHYUXdnf/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "53", title: "Mega Bônus", thumbnail: "/igaming/igaming17.png", videoUrl: "https://drive.google.com/file/d/1a3fZW1TUZG61MGb8rqcoy7xmKPYehE1e/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "1", title: "Ana Partners", thumbnail: "/igaming/thumb-ana.png", videoUrl: "https://drive.google.com/file/d/1MPx78vcbu_BSKR74I1ffNxY4mF0nB5HD/view?usp=drive_link", category: "shorts", duration: "0:45", company: "ana-partners" },
+    { id: "2", title: "Natal Vera.bet", thumbnail: "/igaming/thumb-natal.png", videoUrl: "https://drive.google.com/file/d/1vezppiIYzo30H0EZsJFZIQ6-oQgUcm0U/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "3", title: "Corridas dos Fortunes", thumbnail: "/igaming/thumb-corridaf.png", videoUrl: "https://drive.google.com/file/d/1VveGF8jIEl5t1rDG8jlYOIUBrleOURX1/view?usp=drive_link", category: "shorts", duration: "0:58", company: "vera.bet" },
+    { id: "23", title: "Média de Escanteios", thumbnail: "/igaming/igaming4.png", videoUrl: "https://drive.google.com/file/d/19t4-4cPfwGp70V-buOVzlRx5ZS3OSM7E/view?usp=drive_link", category: "shorts", duration: "0:30", company: "bet7k" },
+    { id: "24", title: "Experiência Bet7k", thumbnail: "/igaming/igaming5.png", videoUrl: "https://drive.google.com/file/d/16CHcpOanA6H7jfQWqmzb4RtZZJ2-Z0hE/view?usp=drive_link", category: "shorts", duration: "0:30", company: "bet7k" },
+    { id: "25", title: "Cashback Superodds", thumbnail: "/igaming/igaming6.png", videoUrl: "https://drive.google.com/file/d/1U6DNodsYvpntQoB7xI8Kbu1GAHHjC7Cc/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "26", title: "Bônus Surpresa", thumbnail: "/igaming/igaming7.png", videoUrl: "https://drive.google.com/file/d/1SVjqtcfAekWvV3atQlwoP4kQeJxpULMj/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "27", title: "Diversão Responsável", thumbnail: "/igaming/igaming8.png", videoUrl: "https://drive.google.com/file/d/1aQhZmkwQt6KiDJ-iF_Ib5TP7_thqzy6C/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "28", title: "Vera.bet Radical", thumbnail: "/igaming/igaming9.png", videoUrl: "https://drive.google.com/file/d/1i_vg4BOZ2-ZGJixBrxGqii3ML3OTID_3/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "32", title: "Jogo de Verdade Vera.bet", thumbnail: "/igaming/igaming10.png", videoUrl: "https://drive.google.com/file/d/1L76nVpYhK2mqaNxnavje0Bs-hrSJBbjW/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "33", title: "100% Autorizada Vera.bet", thumbnail: "/igaming/igaming11.png", videoUrl: "https://drive.google.com/file/d/197patMiLDjQXriOWZLKVKhtI3q5lV6kN/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
+    { id: "34", title: "Black Vera.bet", thumbnail: "/igaming/igaming12.png", videoUrl: "https://drive.google.com/file/d/1MkdkBIlFFLtAdIntMHsjoc4wBf3hWmKy/view?usp=drive_link", category: "shorts", duration: "0:30", company: "vera.bet" },
 
     // Categoria: VSLs (ads) - Adicione novos aqui no início ↓
-    {
-      id: "42",
-      title: "WL 2",
-      thumbnail: "/thumbwl2.png",
-      videoUrl: "https://drive.google.com/file/d/1jgUESdO0Wl7afzY2neEFFvgHwGxm3zHA/view?usp=drive_link",
-      category: "ads",
-      duration: "5:00"
-    },
-    {
-      id: "43",
-      title: "WL 3",
-      thumbnail: "/thumbwl3.png",
-      videoUrl: "https://drive.google.com/file/d/1-tOcsNjBb-lLGdbp9H2qRJS8SKps2HCt/view?usp=drive_link",
-      category: "ads",
-      duration: "5:00"
-    },
-    {
-      id: "4",
-      title: "WL",
-      thumbnail: "/thumbwl.png",
-      videoUrl: "https://drive.google.com/file/d/1posMXt_Zwrvg43SlefVxNo49TQpTkAIo/view?usp=drive_link",
-      category: "ads",
-      duration: "5:52"
-    },
-    {
-      id: "5",
-      title: "DB",
-      thumbnail: "/thumbdb.png",
-      videoUrl: "https://drive.google.com/file/d/1xwcUdfZaEne1kcVm26NFclxoij7aERsC/view?usp=drive_link",
-      category: "ads",
-      duration: "3:41"
-    },
-    {
-      id: "6",
-      title: "PT",
-      thumbnail: "/thumbpt.png",
-      videoUrl: "https://drive.google.com/file/d/182QVzMMwd4uYZkJSDoeR02c_1M-4Sy1w/view?usp=drive_link",
-      category: "ads",
-      duration: "1:58"
-    },
+    { id: "42", title: "WL 2", thumbnail: "/vsl/thumbwl2.png", videoUrl: "https://drive.google.com/file/d/1jgUESdO0Wl7afzY2neEFFvgHwGxm3zHA/view?usp=drive_link", category: "ads", duration: "5:00", company: "grupo-fenix" },
+    { id: "43", title: "WL 3", thumbnail: "/vsl/thumbwl3.png", videoUrl: "https://drive.google.com/file/d/1-tOcsNjBb-lLGdbp9H2qRJS8SKps2HCt/view?usp=drive_link", category: "ads", duration: "5:00", company: "grupo-fenix" },
+    { id: "4", title: "WL", thumbnail: "/vsl/thumbwl.png", videoUrl: "https://drive.google.com/file/d/1posMXt_Zwrvg43SlefVxNo49TQpTkAIo/view?usp=drive_link", category: "ads", duration: "5:52", company: "grupo-fenix" },
+    { id: "5", title: "DB", thumbnail: "/vsl/thumbdb.png", videoUrl: "https://drive.google.com/file/d/1xwcUdfZaEne1kcVm26NFclxoij7aERsC/view?usp=drive_link", category: "ads", duration: "3:41", company: "grupo-fenix" },
+    { id: "6", title: "PT", thumbnail: "/vsl/thumbpt.png", videoUrl: "https://drive.google.com/file/d/182QVzMMwd4uYZkJSDoeR02c_1M-4Sy1w/view?usp=drive_link", category: "ads", duration: "1:58", company: "grupo-fenix" },
 
     // Categoria: Motion & IA (longform) - Adicione novos aqui no início ↓
-    { id: "44", title: "Motion IA 1", thumbnail: "/motion13.png", videoUrl: "https://drive.google.com/file/d/1LR6RgBTgVhZojQHebIgO-EwxklTYpLBz/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "45", title: "Motion IA 2", thumbnail: "/motion14.png", videoUrl: "https://drive.google.com/file/d/1PRNenzKJwK-Y0DjfpXbPrYx3YCwpPmCA/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "46", title: "Motion IA 3", thumbnail: "/motion15.png", videoUrl: "https://drive.google.com/file/d/1_1N3ZJG5NapifraLTpCtBjMRl2FGp0gl/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "47", title: "Motion IA 4", thumbnail: "/motion16.png", videoUrl: "https://drive.google.com/file/d/14tn5LU6usQbTydr3CnsrIolXKZMPtvPa/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "48", title: "Motion IA 5", thumbnail: "/motion17.png", videoUrl: "https://drive.google.com/file/d/1bhnXkX9LP0ujz1HXabclP91UqKI_jdR4/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "7", title: "Saque Rápido Vera.bet", thumbnail: "/motion1.png", videoUrl: "https://drive.google.com/file/d/1-rZOLFESwDpQjnbWxk2qf-24k9gxGzrY/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "8", title: "Saque Rápido Vera.bet", thumbnail: "/motion2.png", videoUrl: "https://drive.google.com/file/d/1HTLl-WI_PxKJA4FbVBV_w6-dX7PLN6Qi/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "11", title: "Mines Vera.bet", thumbnail: "/motion3.png", videoUrl: "https://drive.google.com/file/d/179OZh6sc24vEkS2WkFcjZHyaR6fMOmhZ/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "12", title: "Tigre Sortudo Vera.bet", thumbnail: "/motion4.png", videoUrl: "https://drive.google.com/file/d/1-Ai0obJP3-tmVhc7kDJb6uHIwYJGjXPv/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "18", title: "Gates Of Olympus 7K Chile", thumbnail: "/motion5.png", videoUrl: "https://drive.google.com/file/d/1SeVO-n5kK1upV8M1MbKfv4zReSjDw1JM/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "19", title: "Fortune Tiger 7K Chile", thumbnail: "/motion6.png", videoUrl: "https://drive.google.com/file/d/1z-ZmmqjoE0n1CFo0UHT2U9c5f-m2kFwx/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "20", title: "Halloween Vera.bet", thumbnail: "/motion7.png", videoUrl: "https://drive.google.com/file/d/1Fe8sivEZvHNvbIrYWJ4hTKXNK9K8pW7n/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "21", title: "Aviator é Aqui Vera.bet", thumbnail: "/motion8.png", videoUrl: "https://drive.google.com/file/d/1VEy7DkmBoCAMDsSbFI32SZO3mZ0rbo9n/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "22", title: "Aviator Vera.bet", thumbnail: "/motion9.png", videoUrl: "https://drive.google.com/file/d/1y3AzdSPLLMoMWUm_U9RTtkuprUttUU5z/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "29", title: "Fortune Rabbit Vera.bet", thumbnail: "/motion10.png", videoUrl: "https://drive.google.com/file/d/1Fe8sivEZvHNvbIrYWJ4hTKXNK9K8pW7n/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "30", title: "Estratégia Aviator Vera.bet", thumbnail: "/motion11.png", videoUrl: "https://drive.google.com/file/d/1VEy7DkmBoCAMDsSbFI32SZO3mZ0rbo9n/view?usp=drive_link", category: "longform", duration: "1:00" },
-    { id: "31", title: "Fortune Mouse Vera.bet", thumbnail: "/motion12.png", videoUrl: "https://drive.google.com/file/d/1y3AzdSPLLMoMWUm_U9RTtkuprUttUU5z/view?usp=drive_link", category: "longform", duration: "1:00" },
+    { id: "54", title: "Motion Vera.bet", thumbnail: "/motion/1 (2).png", videoUrl: "https://drive.google.com/file/d/1P9VANEXvbT66gIjKPdE7OLltTRDCBMwd/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "55", title: "Arraiá Vera.bet", thumbnail: "/motion/ARRAIA.png", videoUrl: "https://drive.google.com/file/d/1tmAPNTG7Kb609GCcl5_mgM5EQGi5sUF5/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "56", title: "Aviator Motion", thumbnail: "/motion/AVIATOR MOTION NOVO.png", videoUrl: "https://drive.google.com/file/d/1lmPXpjYHoruKSvY5O9_yQcbqgBD8K_Rl/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "57", title: "Aviator Vera.bet Novo", thumbnail: "/motion/AVIATOR NOVO VERA.BET..png", videoUrl: "https://drive.google.com/file/d/18uFOJmTKLqkIlerwCa8-6lisE8TFU3lY/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "58", title: "Cassino Roleta Vera.bet", thumbnail: "/motion/Cassino Roleta Vera.bet.png", videoUrl: "https://drive.google.com/file/d/1NRBOUP3Vm-pCKeGkCKXu57o-G_fU_DGd/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "59", title: "Double Max", thumbnail: "/motion/DOUBLE MAX AFTER.png", videoUrl: "https://drive.google.com/file/d/1oeVPwN5Q6pVu5wgIpZhgNPenYn-iv9-E/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "60", title: "Gates of Olympus Vera.bet", thumbnail: "/motion/Gates of Olympus VERA.BET v2.png", videoUrl: "https://drive.google.com/file/d/1Iv1MC56oub1YvbhrhEhzI7K-wLgaiNIv/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "61", title: "Motion 08-07", thumbnail: "/motion/MOTION 08-07.png", videoUrl: "https://drive.google.com/file/d/1Kn4MeqoPsZtOtcpZ11C_YV_lRiikPDOf/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "62", title: "Instagram Motion", thumbnail: "/motion/NEW INSTAGRAM MOTION.png", videoUrl: "https://drive.google.com/file/d/1j0ei--S718I-qYk7iXvHZJ8Nd-xq6cB4/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "63", title: "RA1000", thumbnail: "/motion/RA1000.png", videoUrl: "https://drive.google.com/file/d/1Wzq7wMP1JjaEufuxUqPKwda_ceyCDWfH/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "64", title: "Roleta Ao Vivo Vera.bet", thumbnail: "/motion/ROLETA AO VIVO VERA.BET.png", videoUrl: "https://drive.google.com/file/d/1Z4iyXXSRoOowhpjupRgqdrjgSF3OGx07/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "65", title: "TikTok Motion 1", thumbnail: "/motion/TIKTOK 04-07.png", videoUrl: "https://drive.google.com/file/d/1RGn__B2Kt1tpKmC955mLTVXWySRe3IL9/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "66", title: "TikTok Motion 2", thumbnail: "/motion/TIKTOK 2.png", videoUrl: "https://drive.google.com/file/d/1iZnS-3YdSA96Wytlx8qvoHRbCvFmrevp/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "67", title: "TikTok Motion 3", thumbnail: "/motion/TIKTOK 3.png", videoUrl: "https://drive.google.com/file/d/1I_uN_3u_kTH2hwXCuN8ZZXtPaWU9Fi-D/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "68", title: "V1 Test", thumbnail: "/motion/V1 TEST.png", videoUrl: "https://drive.google.com/file/d/170LVkurG6b_fT0JkKLopHoiKdmOIPgtc/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "44", title: "Motion IA 1", thumbnail: "/motion/motion13.png", videoUrl: "https://drive.google.com/file/d/1LR6RgBTgVhZojQHebIgO-EwxklTYpLBz/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "45", title: "Motion IA 2", thumbnail: "/motion/motion14.png", videoUrl: "https://drive.google.com/file/d/1PRNenzKJwK-Y0DjfpXbPrYx3YCwpPmCA/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "46", title: "Motion IA 3", thumbnail: "/motion/motion15.png", videoUrl: "https://drive.google.com/file/d/1_1N3ZJG5NapifraLTpCtBjMRl2FGp0gl/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "47", title: "Motion IA 4", thumbnail: "/motion/motion16.png", videoUrl: "https://drive.google.com/file/d/14tn5LU6usQbTydr3CnsrIolXKZMPtvPa/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "48", title: "Motion IA 5", thumbnail: "/motion/motion17.png", videoUrl: "https://drive.google.com/file/d/1bhnXkX9LP0ujz1HXabclP91UqKI_jdR4/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "7", title: "Saque Rápido Vera.bet", thumbnail: "/motion/motion1.png", videoUrl: "https://drive.google.com/file/d/1-rZOLFESwDpQjnbWxk2qf-24k9gxGzrY/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "8", title: "Saque Rápido Vera.bet", thumbnail: "/motion/motion2.png", videoUrl: "https://drive.google.com/file/d/1HTLl-WI_PxKJA4FbVBV_w6-dX7PLN6Qi/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "11", title: "Mines Vera.bet", thumbnail: "/motion/motion3.png", videoUrl: "https://drive.google.com/file/d/179OZh6sc24vEkS2WkFcjZHyaR6fMOmhZ/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "12", title: "Tigre Sortudo Vera.bet", thumbnail: "/motion/motion4.png", videoUrl: "https://drive.google.com/file/d/1-Ai0obJP3-tmVhc7kDJb6uHIwYJGjXPv/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "18", title: "Gates Of Olympus 7K Chile", thumbnail: "/motion/motion5.png", videoUrl: "https://drive.google.com/file/d/1SeVO-n5kK1upV8M1MbKfv4zReSjDw1JM/view?usp=drive_link", category: "longform", duration: "1:00", company: "bet7k" },
+    { id: "19", title: "Fortune Tiger 7K Chile", thumbnail: "/motion/motion6.png", videoUrl: "https://drive.google.com/file/d/1z-ZmmqjoE0n1CFo0UHT2U9c5f-m2kFwx/view?usp=drive_link", category: "longform", duration: "1:00", company: "bet7k" },
+    { id: "20", title: "Halloween Vera.bet", thumbnail: "/motion/motion7.png", videoUrl: "https://drive.google.com/file/d/1Fe8sivEZvHNvbIrYWJ4hTKXNK9K8pW7n/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "21", title: "Aviator é Aqui Vera.bet", thumbnail: "/motion/motion8.png", videoUrl: "https://drive.google.com/file/d/1VEy7DkmBoCAMDsSbFI32SZO3mZ0rbo9n/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "22", title: "Aviator Vera.bet", thumbnail: "/motion/motion9.png", videoUrl: "https://drive.google.com/file/d/1y3AzdSPLLMoMWUm_U9RTtkuprUttUU5z/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "29", title: "Fortune Rabbit Vera.bet", thumbnail: "/motion/motion10.png", videoUrl: "https://drive.google.com/file/d/1Fe8sivEZvHNvbIrYWJ4hTKXNK9K8pW7n/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "30", title: "Estratégia Aviator Vera.bet", thumbnail: "/motion/motion11.png", videoUrl: "https://drive.google.com/file/d/1VEy7DkmBoCAMDsSbFI32SZO3mZ0rbo9n/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
+    { id: "31", title: "Fortune Mouse Vera.bet", thumbnail: "/motion/motion12.png", videoUrl: "https://drive.google.com/file/d/1y3AzdSPLLMoMWUm_U9RTtkuprUttUU5z/view?usp=drive_link", category: "longform", duration: "1:00", company: "vera.bet" },
 
     // Categoria: Redes Sociais (vsl) - Adicione novos aqui no início ↓
-    { id: "13", title: "Arte e Cultura na Pauta Climática", thumbnail: "/thumb-cop30-1.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397677580281253888?compact=1", category: "vsl", duration: "Video" },
-    { id: "14", title: "Empreendedorismo na Amazônia", thumbnail: "/thumb-cop30-2.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397641693749030912?compact=1", category: "vsl", duration: "Video" },
-    { id: "15", title: "Festival de Investimentos de Impacto", thumbnail: "/thumb-cop30-3.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7394507742683668481?compact=1", category: "vsl", duration: "Video" },
-    { id: "16", title: "Clima: O Novo Anormal", thumbnail: "/thumb-cop30-4.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7393731364304453633?compact=1", category: "vsl", duration: "Video" },
-    { id: "17", title: "Vale da Morte: Sobrevivência Empresarial", thumbnail: "/thumb-cop30-5.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7370801377205374976?compact=1", category: "vsl", duration: "Video" },
-    { id: "35", title: "PlaystationCup @babi_", thumbnail: "/babi1.png", videoUrl: "https://www.tiktok.com/@babi_/video/7377821044092046597", category: "vsl", duration: "Video" },
-    { id: "36", title: "Final Champions League @babi_", thumbnail: "/babi2.png", videoUrl: "https://www.tiktok.com/@babi_/video/7376713002466266373", category: "vsl", duration: "Video" },
-    { id: "37", title: "PlayStation House @babi_", thumbnail: "/babi3.png", videoUrl: "https://www.tiktok.com/@babi_/video/7375320485565041926", category: "vsl", duration: "Video" },
-    { id: "38", title: "Budz", thumbnail: "/thumb-cop30-6.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338962476346019844?compact=1", category: "vsl", duration: "Video" },
-    { id: "39", title: "Das corridas de rua para o mercado de autocuidado", thumbnail: "/thumb-cop30-7.jpg", videoUrl: "https://drive.google.com/file/d/1X5jQWXayi-5e7aNzDK9QpJBJqizWHL5b/view?usp=drive_link", category: "vsl", duration: "Video" },
-    { id: "40", title: "O Açaí para além da polpa", thumbnail: "/thumb-cop30-8.jpg", videoUrl: "https://drive.google.com/file/d/18nWExk0oFJoFvfQ0rhZiFhwEx5KYMjZ1/view?usp=drive_link", category: "vsl", duration: "Video" },
-    { id: "41", title: "A beleza das espécies dos rios amazônicos retratada em serigrafia", thumbnail: "/thumb-cop30-9.jpg", videoUrl: "https://drive.google.com/file/d/1Lcm3ViOtqirmBidi4EbgLOm0cThwxhGr/view?usp=drive_link", category: "vsl", duration: "Video" },
+    { id: "13", title: "Arte e Cultura na Pauta Climática", thumbnail: "/redes-sociais/thumb-cop30-1.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397677580281253888?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "14", title: "Empreendedorismo na Amazônia", thumbnail: "/redes-sociais/thumb-cop30-2.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7397641693749030912?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "15", title: "Festival de Investimentos de Impacto", thumbnail: "/redes-sociais/thumb-cop30-3.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7394507742683668481?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "16", title: "Clima: O Novo Anormal", thumbnail: "/redes-sociais/thumb-cop30-4.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7393731364304453633?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "17", title: "Vale da Morte: Sobrevivência Empresarial", thumbnail: "/redes-sociais/thumb-cop30-5.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7370801377205374976?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "35", title: "PlaystationCup @babi_", thumbnail: "/redes-sociais/babi1.png", videoUrl: "https://www.tiktok.com/@babi_/video/7377821044092046597", category: "vsl", duration: "Video", company: "loud" },
+    { id: "36", title: "Final Champions League @babi_", thumbnail: "/redes-sociais/babi2.png", videoUrl: "https://www.tiktok.com/@babi_/video/7376713002466266373", category: "vsl", duration: "Video", company: "loud" },
+    { id: "37", title: "PlayStation House @babi_", thumbnail: "/redes-sociais/babi3.png", videoUrl: "https://www.tiktok.com/@babi_/video/7375320485565041926", category: "vsl", duration: "Video", company: "loud" },
+    { id: "38", title: "Budz", thumbnail: "/redes-sociais/thumb-cop30-6.jpg", videoUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7338962476346019844?compact=1", category: "vsl", duration: "Video", company: "draft" },
+    { id: "39", title: "Das corridas de rua para o mercado de autocuidado", thumbnail: "/redes-sociais/thumb-cop30-7.jpg", videoUrl: "https://drive.google.com/file/d/1X5jQWXayi-5e7aNzDK9QpJBJqizWHL5b/view?usp=drive_link", category: "vsl", duration: "Video", company: "draft" },
+    { id: "40", title: "O Açaí para além da polpa", thumbnail: "/redes-sociais/thumb-cop30-8.jpg", videoUrl: "https://drive.google.com/file/d/18nWExk0oFJoFvfQ0rhZiFhwEx5KYMjZ1/view?usp=drive_link", category: "vsl", duration: "Video", company: "draft" },
+    { id: "41", title: "A beleza das espécies dos rios amazônicos retratada em serigrafia", thumbnail: "/redes-sociais/thumb-cop30-9.jpg", videoUrl: "https://drive.google.com/file/d/1Lcm3ViOtqirmBidi4EbgLOm0cThwxhGr/view?usp=drive_link", category: "vsl", duration: "Video", company: "draft" },
   ];
 
-  const filteredVideos = videos.filter((v) => v.category === activeCategory);
+  // Filtrar empresas que têm vídeos na categoria atual
+  const companiesInCategory = videos
+    .filter(v => v.category === activeCategory)
+    .map(v => v.company);
+  const uniqueCompanies = [...new Set(companiesInCategory)];
+
+  // Mostrar apenas empresas relevantes para a categoria + "Todos"
+  const visibleCompanies = companies.filter(
+    c => c.id === "all" || uniqueCompanies.includes(c.id)
+  );
+
+  // Filtro por categoria e empresa
+  const filteredVideos = videos.filter((v) => {
+    const matchCategory = v.category === activeCategory;
+    const matchCompany = activeCompany === "all" || v.company === activeCompany;
+    return matchCategory && matchCompany;
+  });
 
   // Funções de navegação do carrossel
   const scrollCarousel = (direction: 'left' | 'right') => {
@@ -186,6 +205,37 @@ const Portfolio = () => {
                 />
               )}
               {cat.label}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Botões de Empresa */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-2 mb-8"
+        >
+          {visibleCompanies.map((comp) => (
+            <button
+              key={comp.id}
+              onClick={() => setActiveCompany(comp.id)}
+              aria-label={`Filtrar por ${comp.label}`}
+              aria-pressed={activeCompany === comp.id}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium transition-all duration-300 ${activeCompany === comp.id
+                ? "bg-primary/20 text-primary border-2 border-primary shadow-lg shadow-primary/20"
+                : "bg-secondary/30 text-secondary-foreground hover:bg-secondary/50 border border-border/30 hover:border-primary/30"
+                }`}
+            >
+              {comp.logo && (
+                <img
+                  src={comp.logo}
+                  alt={comp.label}
+                  className="w-5 h-5 object-contain"
+                />
+              )}
+              {comp.label}
             </button>
           ))}
         </motion.div>
